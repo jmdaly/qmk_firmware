@@ -22,6 +22,7 @@ enum {
   _WORKSPACE_2,
   _MOD_TAB,
   _TMUX_PREFIX,
+  _SEARCH_HIST,
 
   // Tap dance declarations
   TD_TMUX_PGUP,
@@ -39,6 +40,7 @@ enum {
 #define WS_2    M(_WORKSPACE_2)
 #define MOD_TAB M(_MOD_TAB)
 #define TX_PFX  M(_TMUX_PREFIX)
+#define SEARCH  M(_SEARCH_HIST)
 
 // Fillers to make layering more clear
 #define _______ KC_TRNS
@@ -53,10 +55,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                    KC_KP_0, KC_KP_DOT, TD(TD_LAYER_CHANGE), KC_BSPC),
 
   [_L1] = /* LAYER 1 */
-    SINGLES_KEYMAP(WS_1,    WS_2,    TX_LW,    TD(TD_TMUX_PGUP), \
-                   MOD_TAB, KC_UP,   TX_LS,    KC_PGDOWN,        \
-                   TX_PFX,  KC_TRNS, KC_RIGHT, KC_TRNS,          \
-                   MO(_L2), KC_TRNS, KC_TRNS,  KC_TRNS),
+    SINGLES_KEYMAP(WS_1,    WS_2,    TX_LW,   TD(TD_TMUX_PGUP), \
+                   MOD_TAB, KC_UP,   TX_LS,   KC_PGDOWN,        \
+                   SEARCH,  KC_TRNS, TX_PFX,  KC_TRNS,          \
+                   MO(_L2), KC_TRNS, KC_TRNS, KC_TRNS),
 
   [_L2] = /* LAYER 2 */
     SINGLES_KEYMAP(KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, \
@@ -120,6 +122,11 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
         case _TMUX_PREFIX:
           if (record->event.pressed) {
             return MACRO( I(10), D(LCTRL), T(B), U(LCTRL), END );
+          }
+          break;
+        case _SEARCH_HIST:
+          if (record->event.pressed) {
+            return MACRO( I(10), D(LCTRL), T(R), U(LCTRL), END );
           }
           break;
       }
