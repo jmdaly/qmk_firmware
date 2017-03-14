@@ -18,15 +18,14 @@ enum {
   // Macros
   _TMUX_LAST_WINDOW,
   _TMUX_LAST_SESSION,
-  _WORKSPACE_1,
-  _WORKSPACE_2,
   _MOD_TAB,
   _TMUX_PREFIX,
   _SEARCH_HIST,
 
   // Tap dance declarations
   TD_TMUX_PGUP,
-  TD_LAYER_CHANGE
+  TD_LAYER_CHANGE,
+  TD_WS_SWITCH
 };
 
 // Macro name shortcuts
@@ -36,8 +35,6 @@ enum {
 
 #define TX_LW   M(_TMUX_LAST_WINDOW)
 #define TX_LS   M(_TMUX_LAST_SESSION)
-#define WS_1    M(_WORKSPACE_1)
-#define WS_2    M(_WORKSPACE_2)
 #define MOD_TAB M(_MOD_TAB)
 #define TX_PFX  M(_TMUX_PREFIX)
 #define SEARCH  M(_SEARCH_HIST)
@@ -55,16 +52,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                    KC_KP_0, KC_KP_DOT, TD(TD_LAYER_CHANGE), KC_BSPC),
 
   [_L1] = /* LAYER 1 */
-    SINGLES_KEYMAP(WS_1,    WS_2,    TX_LW,   TD(TD_TMUX_PGUP), \
-                   MOD_TAB, KC_UP,   TX_LS,   KC_PGDOWN,        \
-                   SEARCH,  KC_TRNS, TX_PFX,  KC_TRNS,          \
-                   MO(_L2), KC_TRNS, KC_TRNS, KC_TRNS),
+    SINGLES_KEYMAP(TD(TD_WS_SWITCH), KC_UP,   TX_LW,   TD(TD_TMUX_PGUP), \
+                   MOD_TAB,          _______, TX_LS,   KC_PGDOWN,        \
+                   SEARCH,           KC_DOWN, TX_PFX,  _______,          \
+                   MO(_L2),          _______, _______, _______),
 
   [_L2] = /* LAYER 2 */
-    SINGLES_KEYMAP(KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, \
-                   KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, \
-                   RESET,   KC_TRNS, KC_TRNS, KC_TRNS, \
-                   KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS)
+    SINGLES_KEYMAP(_______, _______, _______, _______, \
+                   _______, _______, _______, _______, \
+                   RESET,   _______, _______, _______, \
+                   _______, _______, _______, _______)
 };
 
 const uint16_t PROGMEM fn_actions[] = {
@@ -102,16 +99,6 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
         case _TMUX_LAST_SESSION:
           if (record->event.pressed) {
             return MACRO( I(10), D(LCTRL), D(B), W(10), U(B), U(LCTRL), D(LSHIFT), T(L), U(LSHIFT), END );
-          }
-          break;
-        case _WORKSPACE_1:
-          if (record->event.pressed) {
-            return MACRO( I(10), D(LGUI), T(1), U(LGUI), END );
-          }
-          break;
-        case _WORKSPACE_2:
-          if (record->event.pressed) {
-            return MACRO( I(10), D(LGUI), T(2), U(LGUI), END );
           }
           break;
         case _MOD_TAB:
@@ -166,9 +153,35 @@ static void tap_dance_layer_change (qk_tap_dance_state_t *state, void *user_data
   }
 }
 
+// This function is used to switch workspaces / tabs in
+// a terminal. If the key is pressed n times, we switch to
+// workspace n.
+static void tap_dance_ws_change (qk_tap_dance_state_t *state, void *user_data) {
+  if (state->count == 1) {
+    register_code(KC_LGUI);
+    register_code(KC_1);
+
+    unregister_code(KC_LGUI);
+    unregister_code(KC_1);
+  } else if (state->count == 2) {
+    register_code(KC_LGUI);
+    register_code(KC_2);
+
+    unregister_code(KC_LGUI);
+    unregister_code(KC_2);
+  } else if (state->count == 3) {
+    register_code(KC_LGUI);
+    register_code(KC_3);
+
+    unregister_code(KC_LGUI);
+    unregister_code(KC_3);
+  }
+}
+
 // Tap Dance Definitions
 qk_tap_dance_action_t tap_dance_actions[] = {
   // Tap twice for CTRL-B followed by page up, once for page up
   [TD_TMUX_PGUP] = ACTION_TAP_DANCE_FN(tap_dance_tmux_page_up),
-  [TD_LAYER_CHANGE] = ACTION_TAP_DANCE_FN(tap_dance_layer_change)
+  [TD_LAYER_CHANGE] = ACTION_TAP_DANCE_FN(tap_dance_layer_change),
+  [TD_WS_SWITCH] = ACTION_TAP_DANCE_FN(tap_dance_ws_change)
 };
