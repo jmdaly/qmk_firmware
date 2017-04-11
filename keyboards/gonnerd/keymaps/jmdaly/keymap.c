@@ -43,19 +43,14 @@ const uint16_t PROGMEM fn_actions[] = {
 
 };
 
-void persistant_default_layer_set(uint16_t default_layer) {
-  eeconfig_update_default_layer(default_layer);
-  default_layer_set(default_layer);
-}
-
 // This function is used to switch between layers using
 // tap dance. The number of taps corresponds to the layer
 // number to change to.
 static void tap_dance_layer_change (qk_tap_dance_state_t *state, void *user_data) {
   if (state->count == 1) {
-    persistant_default_layer_set(1UL<<_L1);
+    default_layer_set(1UL<<_L1);
   } else {
-    persistant_default_layer_set(1UL<<_L2);
+    default_layer_set(1UL<<_L2);
   } 
 }
 
