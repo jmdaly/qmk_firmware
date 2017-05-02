@@ -31,7 +31,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     {MO(_L2),       KC_LGUI, MO(_L3), KC_ENT,  XXXXXXX, XXXXXXX, XXXXXXX, KC_SPC,  KC_RALT, KC_BSLS,  XXXXXXX, MO(_L4) }
   },
   [_L2] = { /* LAYER 2 */
-    {KC_GRV,  KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_DEL  },
+    {KC_GRV,  KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_CIRC, KC_AMPR, KC_ASTR, KC_UNDS, KC_PLUS, KC_DEL  },
     {_______, KC_BSLS, KC_QUOT, KC_MINS, KC_EQL,  KC_LBRC, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _______, _______ },
     {_______, KC_ESC,  _______, KC_PSCR, _______, _______, _______, KC_MSTP, KC_LBRC, KC_RBRC, KC_MNXT, _______ },
     {_______, KC_LGUI, _______, _______, XXXXXXX, XXXXXXX, XXXXXXX, _______, _______, _______, XXXXXXX, MO(_L4) }
@@ -43,10 +43,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     {_______, _______,  _______,  _______, XXXXXXX, XXXXXXX,       XXXXXXX,       _______, _______, _______, XXXXXXX, _______ }
   },
   [_L4] = { /* LAYER 4 */
-    {RESET,   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,     KC_PGUP,   _______ },
-    {KC_ESC,  _______, _______, _______, _______, _______, _______, KC_F5,   KC_F6,   KC_HOME,   KC_END,    _______ },
-    {KC_LSFT, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_F9,   KC_F10,  KC_PGDN,   KC_F12,    _______ },
-    {_______, KC_LSFT, KC_B,    KC_SPC,  XXXXXXX, XXXXXXX, XXXXXXX, KC_C,    _______, _______,   XXXXXXX,   _______ }
+    {KC_TILD,   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,     KC_PGUP,   _______ },
+    {KC_ESC,    _______, _______, _______, _______, _______, _______, KC_F5,   KC_F6,   KC_HOME,   KC_END,    _______ },
+    {KC_LSFT,   KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_F9,   KC_F10,  KC_PGDN,   KC_F12,    _______ },
+    {RESET,     KC_LSFT, KC_B,    KC_SPC,  XXXXXXX, XXXXXXX, XXXXXXX, KC_C,    _______, _______,   XXXXXXX,   _______ }
   }
 };
 
