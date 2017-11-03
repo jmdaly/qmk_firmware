@@ -12,7 +12,8 @@ enum {
   _L1,
   _L2,
   _L3,
-  _L4
+  _L4,
+  _L5
 };
 
 // Macro name shortcuts
@@ -25,8 +26,8 @@ enum {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_L1] = { /* Qwerty */
-    {KC_TAB,        KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,     KC_P,    KC_BSPC },
-    {CTL_T(KC_ESC), KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,     KC_SCLN, FUNC(0)},
+    {LT(_L5, KC_TAB),       KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,     KC_P,    KC_BSPC },
+    {CTL_T(KC_ESC), KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,     KC_SCLN, LT(_L2, KC_QUOT)},
     {KC_LSPO,       KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,   KC_SLSH, KC_RSPC },
     {MO(_L2),       KC_LGUI, MO(_L3), KC_ENT,  XXXXXXX, XXXXXXX, XXXXXXX, KC_SPC,  KC_RALT, KC_BSLS,  XXXXXXX, MO(_L4) }
   },
@@ -47,9 +48,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     {KC_ESC,    _______, _______, _______, _______, _______, _______, KC_F5,   KC_F6,   KC_HOME,   KC_END,    _______ },
     {KC_LSFT,   KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_F9,   KC_F10,  KC_PGDN,   KC_F12,    _______ },
     {RESET,     KC_LSFT, KC_B,    KC_SPC,  XXXXXXX, XXXXXXX, XXXXXXX, KC_C,    _______, _______,   XXXXXXX,   _______ }
+  },
+  [_L5] = { /* LAYER 5 */
+    {_______,   LGUI(KC_1),   LGUI(KC_2),   LGUI(KC_3),   LGUI(KC_4),   LGUI(KC_5),   LGUI(KC_6),   LGUI(KC_7),   LGUI(KC_8),   LGUI(KC_9),     LGUI(KC_0),   LGUI(KC_MINS) },
+    {KC_ESC,    _______, _______, _______, _______, _______, _______, KC_F5,   KC_F6,   KC_HOME,   KC_END,    _______ },
+    {KC_LSFT,   KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_F9,   KC_F10,  KC_PGDN,   KC_F12,    _______ },
+    {RESET,     KC_LSFT, KC_B,    KC_SPC,  XXXXXXX, XXXXXXX, XXXXXXX, KC_C,    _______, _______,   XXXXXXX,   _______ }
   }
 };
 
-const uint16_t PROGMEM fn_actions[] = {
-  [0] = ACTION_LAYER_TAP_KEY(_L2, KC_QUOT)
-};
