@@ -19,8 +19,6 @@ enum {
   _TMUX_LAST_WINDOW,
   _TMUX_LAST_SESSION,
   _MOD_TAB,
-  _TMUX_PREFIX,
-  _SEARCH_HIST,
   _TMUX_FINGERS,
 
   // Tap dance declarations
@@ -37,8 +35,6 @@ enum {
 #define TX_LW   M(_TMUX_LAST_WINDOW)
 #define TX_LS   M(_TMUX_LAST_SESSION)
 #define MOD_TAB M(_MOD_TAB)
-#define TX_PFX  M(_TMUX_PREFIX)
-#define SEARCH  M(_SEARCH_HIST)
 #define TX_FNGR M(_TMUX_FINGERS)
 
 // Fillers to make layering more clear
@@ -54,9 +50,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                    KC_KP_0, KC_KP_DOT, TD(TD_LAYER_CHANGE), KC_NUMLOCK),
 
   [_L1] = /* LAYER 1 */
-    LAYOUT_ortho_4x4(TD(TD_WS_SWITCH), KC_UP,   TX_LW,   TD(TD_TMUX_PGUP), \
-                   MOD_TAB,          TX_FNGR, TX_LS,   KC_PGDOWN,        \
-                   SEARCH,           KC_DOWN, TX_PFX,  _______,          \
+    LAYOUT_ortho_4x4(TD(TD_WS_SWITCH), LCTL(KC_K),   TX_LW,   TD(TD_TMUX_PGUP), \
+                   MOD_TAB,          TX_FNGR,      TX_LS,       KC_PGDOWN,        \
+                   LCTL(KC_H),       LCTL(KC_J),   LCTL(KC_L),  _______,          \
                    MO(_L2),          _______, _______, _______),
 
   [_L2] = /* LAYER 2 */
@@ -106,16 +102,6 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
         case _MOD_TAB:
           if (record->event.pressed) {
             return MACRO( I(10), D(LGUI), T(TAB), U(LGUI), END );
-          }
-          break;
-        case _TMUX_PREFIX:
-          if (record->event.pressed) {
-            return MACRO( I(10), D(LCTRL), T(B), U(LCTRL), END );
-          }
-          break;
-        case _SEARCH_HIST:
-          if (record->event.pressed) {
-            return MACRO( I(10), D(LCTRL), T(R), U(LCTRL), END );
           }
           break;
         case _TMUX_FINGERS:
