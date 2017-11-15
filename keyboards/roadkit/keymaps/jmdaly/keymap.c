@@ -48,19 +48,19 @@ enum {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_NP] = /* Numpad */
-    SINGLES_KEYMAP(KC_KP_7, KC_KP_8,   KC_KP_9,             KC_KP_MINUS, \
+    LAYOUT_ortho_4x4(KC_KP_7, KC_KP_8,   KC_KP_9,             KC_KP_MINUS, \
                    KC_KP_4, KC_KP_5,   KC_KP_6,             KC_KP_PLUS,  \
                    KC_KP_1, KC_KP_2,   KC_KP_3,             KC_KP_ENTER, \
                    KC_KP_0, KC_KP_DOT, TD(TD_LAYER_CHANGE), KC_NUMLOCK),
 
   [_L1] = /* LAYER 1 */
-    SINGLES_KEYMAP(TD(TD_WS_SWITCH), KC_UP,   TX_LW,   TD(TD_TMUX_PGUP), \
+    LAYOUT_ortho_4x4(TD(TD_WS_SWITCH), KC_UP,   TX_LW,   TD(TD_TMUX_PGUP), \
                    MOD_TAB,          TX_FNGR, TX_LS,   KC_PGDOWN,        \
                    SEARCH,           KC_DOWN, TX_PFX,  _______,          \
                    MO(_L2),          _______, _______, _______),
 
   [_L2] = /* LAYER 2 */
-    SINGLES_KEYMAP(_______, _______, _______, _______, \
+    LAYOUT_ortho_4x4(_______, _______, _______, _______, \
                    _______, _______, _______, _______, \
                    RESET,   _______, _______, _______, \
                    _______, _______, _______, _______)
