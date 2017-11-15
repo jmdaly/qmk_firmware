@@ -50,8 +50,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                    KC_KP_0, KC_KP_DOT, TD(TD_LAYER_CHANGE), KC_NUMLOCK),
 
   [_L1] = /* LAYER 1 */
-    LAYOUT_ortho_4x4(TD(TD_WS_SWITCH), LCTL(KC_K),   TX_LW,   TD(TD_TMUX_PGUP), \
-                   MOD_TAB,          TX_FNGR,      TX_LS,       KC_PGDOWN,        \
+    LAYOUT_ortho_4x4(TD(TD_WS_SWITCH), TX_FNGR,   TX_LW,   TD(TD_TMUX_PGUP), \
+                   MOD_TAB,          LCTL(KC_K),      TX_LS,       KC_PGDOWN,        \
                    LCTL(KC_H),       LCTL(KC_J),   LCTL(KC_L),  _______,          \
                    MO(_L2),          _______, _______, _______),
 
