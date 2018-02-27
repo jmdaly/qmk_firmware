@@ -29,7 +29,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     {LT(_L5, KC_TAB),       KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,     KC_P,    KC_BSPC },
     {CTL_T(KC_ESC), KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,     KC_SCLN, LT(_L2, KC_QUOT)},
     {KC_LSPO,       KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,   KC_SLSH, KC_RSPC },
-    {MO(_L2),       KC_LGUI, MO(_L3), KC_ENT,  XXXXXXX, XXXXXXX, XXXXXXX, KC_SPC,  KC_RALT, KC_BSLS,  XXXXXXX, MO(_L4) }
+    {MO(_L2),       KC_LGUI, MO(_L3), KC_ENT,  XXXXXXX, XXXXXXX, XXXXXXX, LT(_L2, KC_SPC),  KC_RALT, KC_BSLS,  XXXXXXX, MO(_L4) }
   },
   [_L2] = { /* LAYER 2 */
     {KC_GRV,  KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_CIRC, KC_AMPR, KC_ASTR, KC_UNDS, KC_PLUS, KC_DEL  },
