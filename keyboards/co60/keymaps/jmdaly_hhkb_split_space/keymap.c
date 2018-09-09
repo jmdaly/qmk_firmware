@@ -15,6 +15,7 @@
  */
 #include QMK_KEYBOARD_H
 
+#define LEADER_TIMEOUT 300
 #define _______ KC_TRNS
 
 enum co60_layers {
@@ -28,7 +29,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U, KC_I,    KC_O,    KC_P,    KC_LBRC,    KC_RBRC, KC_BSPC, \
     CTL_T(KC_ESC), KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J, KC_K,    KC_L,    KC_SCLN, KC_QUOT,    KC_ENT,  \
     KC_LSPO, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M, KC_COMM, KC_DOT,  KC_SLSH, KC_RSPC, MO(_L2),   \
-             KC_LALT, KC_LGUI,       KC_ENT,              MO(_L2),       KC_SPC,  KC_RCTL, KC_RGUI, KC_RALT \
+             KC_LALT, KC_LGUI,       KC_ENT,              MO(_L2),       KC_SPC,  KC_LEAD, KC_RGUI, KC_RALT \
   ),
   [_L2] = LAYOUT_60_hhkb_split_625u_space( /* Function */
     RESET,   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,     KC_F10,    KC_F11,     KC_F12,   _______, _______,   \
@@ -63,8 +64,70 @@ void matrix_init_user(void) {
 
 }
 
+LEADER_EXTERNS();
+
 void matrix_scan_user(void) {
 
+  LEADER_DICTIONARY() {
+    leading = false;
+    leader_end();
+
+    // Close a program in i3wm
+    SEQ_ONE_KEY(KC_Q) {
+      register_code(KC_LGUI);
+      register_code(KC_LSHIFT);
+      register_code(KC_Q);
+      unregister_code(KC_Q);
+      unregister_code(KC_LSHIFT);
+      unregister_code(KC_LGUI);
+    }
+    // Exit i3wm
+    SEQ_ONE_KEY(KC_E) {
+      register_code(KC_LGUI);
+      register_code(KC_LSHIFT);
+      register_code(KC_E);
+      unregister_code(KC_E);
+      unregister_code(KC_LSHIFT);
+      unregister_code(KC_LGUI);
+    }
+    // Copy selected text in suckless terminal
+    SEQ_ONE_KEY(KC_C) {
+      register_code(KC_LCTL);
+      register_code(KC_LSHIFT);
+      register_code(KC_C);
+      unregister_code(KC_C);
+      unregister_code(KC_LSHIFT);
+      unregister_code(KC_LCTL);
+    }
+    // Paste text in suckless terminal
+    SEQ_ONE_KEY(KC_V) {
+      register_code(KC_LCTL);
+      register_code(KC_LSHIFT);
+      register_code(KC_V);
+      unregister_code(KC_V);
+      unregister_code(KC_LSHIFT);
+      unregister_code(KC_LCTL);
+    }
+    // FZF shortcut to fuzzy switch directories
+    SEQ_ONE_KEY(KC_D) {
+      register_code(KC_LALT);
+      register_code(KC_C);
+      unregister_code(KC_C);
+      unregister_code(KC_LALT);
+    }
+    // Send keys to bring up fuzzy process kill
+    SEQ_ONE_KEY(KC_K) {
+      SEND_STRING("kill " SS_TAP(X_TAB));
+    }
+    // Send keys to start neovim and fuzzy search for filename
+    SEQ_ONE_KEY(KC_T) {
+      SEND_STRING("nvim ");
+      register_code(KC_LCTL);
+      register_code(KC_T);
+      unregister_code(KC_T);
+      unregister_code(KC_LCTL);
+    }
+  }
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
