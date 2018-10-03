@@ -139,6 +139,15 @@ void matrix_scan_user(void) {
       unregister_code(KC_T);
       unregister_code(KC_LCTL);
     }
+    // Switch between windows in tmux
+    SEQ_ONE_KEY(KC_L) {
+      register_code(KC_LCTL);
+      register_code(KC_B);
+      unregister_code(KC_B);
+      unregister_code(KC_LCTL);
+      register_code(KC_L);
+      unregister_code(KC_L);
+    }
   }
 }
 
