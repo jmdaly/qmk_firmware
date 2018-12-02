@@ -23,7 +23,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 /* USB Device descriptor parameter */
 #define VENDOR_ID       0xFEED
 #define PRODUCT_ID      0x0000
-#define DEVICE_VER      0x0003
 #define MANUFACTURER    John M Daly
 #define PRODUCT         CO60
 #define DESCRIPTION     A 60% PCB featuring split space bar, ESD protection, and South facing LEDs
