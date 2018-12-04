@@ -25,7 +25,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define PRODUCT_ID      0x0000
 #define MANUFACTURER    John M Daly
 #define PRODUCT         CO60
-#define DESCRIPTION     A 60% PCB featuring split space bar, ESD protection, and South facing LEDs
+#define DESCRIPTION     An open hardware sixty percent PCB
 
 /* key matrix size */
 #define MATRIX_ROWS 5
@@ -48,8 +48,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 /* COL2ROW, ROW2COL, or CUSTOM_MATRIX */
 #define DIODE_DIRECTION COL2ROW
 
+#ifdef __AVR__
 #define BACKLIGHT_PIN B7
 #define BACKLIGHT_BREATHING
+#endif
 #define BACKLIGHT_LEVELS 3
 
 
