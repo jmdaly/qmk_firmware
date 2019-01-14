@@ -15,8 +15,8 @@
  * Row pins are output and strobe with high.
  * Key is high or 1 when it turns on.
  *
- *     col: { PA2, PA3, PA6, PB14, PB15, PA8, PA9, PA7, PB3, PB4, PC14, PC15, PC13, PB5, PB6 }
- *     row: { PB0, PB1, PB2, PA15, PA10 }
+ *     col: { PA10, PA9, PA3, PA4, PA5, PA6, PB0, PB1, PA15, PB3, PB4, PB5, PC13, PC14, PC15 }
+ *     row: { PA8, PA2, PB13, PB2, PB10 }
  */
 /* matrix state(1:on, 0:off) */
 static matrix_row_t matrix[MATRIX_ROWS];
@@ -71,7 +71,6 @@ void matrix_init(void) {
     memset(matrix, 0, MATRIX_ROWS * sizeof(matrix_row_t));
     memset(matrix_debouncing, 0, MATRIX_COLS * sizeof(matrix_row_t));
 
-    palClearPad(GPIOB, 7);  // Turn off capslock
     matrix_init_quantum();
 }
 
@@ -79,7 +78,7 @@ uint8_t matrix_scan(void) {
     for (int col = 0; col < MATRIX_COLS; col++) {
         matrix_row_t data = 0;
 
-        // strobe col { PA2, PA3, PA6, PB14, PB15, PA8, PA9, PA7, PB3, PB4, PC14, PC15, PC13, PB5, PB6 }
+        // strobe col { PA10, PA9, PA3, PA4, PA5, PA6, PB0, PB1, PA15, PB3, PB4, PB5, PC13, PC14, PC15 }
         switch (col) {
             case 0: palSetPad(GPIOA, 10); break;
             case 1: palSetPad(GPIOA, 9); break;
@@ -101,7 +100,7 @@ uint8_t matrix_scan(void) {
         // need wait to settle pin state
         wait_us(20);
 
-        // read row data { PB0, PB1, PB2, PA15, PA10 }
+        // read row data { PA8, PA2, PB13, PB2, PB10 }
         data = (
             (palReadPad(GPIOA, 8) << 0 ) |
             (palReadPad(GPIOA, 2) << 1 ) |
@@ -110,7 +109,7 @@ uint8_t matrix_scan(void) {
             (palReadPad(GPIOB, 10) << 4 )
         );
 
-        // unstrobe  col { PA2, PA3, PA6, PB14, PB15, PA8, PA9, PA7, PB3, PB4, PC15, PC14, PC13, PB5, PB6 }
+        // unstrobe col { PA10, PA9, PA3, PA4, PA5, PA6, PB0, PB1, PA15, PB3, PB4, PB5, PC13, PC14, PC15 }
         switch (col) {
             case 0: palSetPad(GPIOA, 10); break;
             case 1: palSetPad(GPIOA, 9); break;
