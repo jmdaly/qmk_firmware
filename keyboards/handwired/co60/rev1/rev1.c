@@ -13,7 +13,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include "co60.h"
+#include "rev1.h"
 
 __attribute__ ((weak))
 void matrix_init_kb(void) {

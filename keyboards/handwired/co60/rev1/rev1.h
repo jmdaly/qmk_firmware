@@ -13,8 +13,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef CO60_H
-#define CO60_H
+#pragma once
 
 #include "quantum.h"
 
@@ -126,5 +125,3 @@
     { K300,  KC_NO,  K302, K303,  K304, K305,  K306, K307,  K308, K309,  K310, K311, KC_NO, K313,  K314 }, \
     { KC_NO, K401,   K402, KC_NO, K404, KC_NO, K406, KC_NO, K408, KC_NO, K410, K411, KC_NO, K413, KC_NO }, \
 }
-
-#endif
