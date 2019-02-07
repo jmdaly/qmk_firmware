@@ -13,12 +13,9 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include "rev6.h"
+#ifndef REV7_H
+#define REV7_H
 
-void matrix_init_kb(void) {
-	matrix_init_user();
-}
+#include "co60.h"
 
-void matrix_scan_kb(void) {
-	matrix_scan_user();
-}
+#endif
