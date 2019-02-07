@@ -19,7 +19,12 @@
 #define REV6_CONFIG_H
 
 /* USB Device descriptor parameter */
-#define DEVICE_VER 0x0006
+#define VENDOR_ID       0xFEED
+#define PRODUCT_ID      0x0000
+#define DEVICE_VER	0x0001
+#define MANUFACTURER    John M Daly
+#define PRODUCT         CO60 rev6
+#define DESCRIPTION     An open hardware sixty percent PCB
 
 #undef MATRIX_ROWS
 #undef MATRIX_COLS
@@ -50,6 +55,10 @@
 //#define LOCKING_SUPPORT_ENABLE
 /* Locking resynchronize hack */
 //#define LOCKING_RESYNC_ENABLE
+
+/* Backlight configuration
+ */
+#define BACKLIGHT_LEVELS 1
 
 /*
  * Force NKRO
