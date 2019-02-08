@@ -15,10 +15,35 @@
  */
 #include "rev7.h"
 
+#include "backlight.h"
+#include "led.h"
+#include "printf.h"
+
 void matrix_init_kb(void) {
 	matrix_init_user();
 }
 
 void matrix_scan_kb(void) {
 	matrix_scan_user();
+}
+
+void backlight_init_ports(void) {
+    printf("backlight_init_ports()\n");
+    #ifdef BACKLIGHT_ENABLE
+    palSetPadMode(GPIOB, 8, PAL_MODE_OUTPUT_PUSHPULL);
+    palSetPad(GPIOB, 8);
+    #endif
+}
+
+void backlight_set(uint8_t level) {
+    printf("backlight_set(%d)\n", level);
+    #ifdef BACKLIGHT_ENABLE
+    if (level == 0) {
+        // Turn backlight off
+        palSetPad(GPIOB, 8);
+    } else {
+        // Turn backlight on
+        palClearPad(GPIOB, 8);
+    }
+    #endif
 }
