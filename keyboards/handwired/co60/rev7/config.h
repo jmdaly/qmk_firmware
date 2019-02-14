@@ -55,5 +55,16 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define LOCKING_RESYNC_ENABLE
 
 /* Backlight configuration
+ * Backlight LEDs on B8
  */
-#define BACKLIGHT_LEVELS 1
+#define BACKLIGHT_LEVELS 24
+#define BACKLIGHT_BREATHING
+#define BREATHING_PERIOD 6
+
+#define RGBLIGHT_ANIMATIONS
+
+#define RGBLED_NUM 16
+#define RGB_DI_PIN A7
+#define DRIVER_LED_TOTAL RGBLED_NUM
+
+#define RGB_MATRIX_KEYPRESSES
