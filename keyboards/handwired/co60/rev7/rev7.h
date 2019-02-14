@@ -13,8 +13,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef REV7_H
-#define REV7_H
+#pragma once
 
 #include "quantum.h"
 
@@ -127,4 +126,21 @@
     { KC_NO, K401,   K402, KC_NO, K404, KC_NO, K406, KC_NO, K408, KC_NO, K410, K411, KC_NO, K413, KC_NO }, \
 }
 
-#endif
+// Backlighting
+typedef union {
+    uint8_t raw;
+    struct {
+        bool    enable :1;
+        bool    breathing : 1;
+        uint8_t level  :6;
+    };
+} backlight_levels_config_t;
+
+extern backlight_levels_config_t kb_backlight_config;
+extern bool kb_backlight_breathing;
+
+void backlight_init_ports(void);
+void backlight_set(uint8_t level);
+bool is_breathing(void);
+void breathing_enable(void);
+void breathing_disable(void);
