@@ -1,6 +1,4 @@
 # project specific files
-SRC =	matrix.c \
-	led.c
 LAYOUTS += all 60_ansi 60_ansi_split_bs_rshift 60_iso 60_hhkb 60_hhkb_split_space 60_hhkb_split_625u_space
 
 ## chip/board settings
@@ -34,26 +32,27 @@ USE_FPU = yes
 # 0x00000000-0x00001000 area is occupied by bootlaoder.*/
 # The CORTEX_VTOR... is needed only for MCHCK/Infinity KB
 # OPT_DEFS = -DCORTEX_VTOR_INIT=0x08005000
-
 OPT_DEFS += -DNO_SUSPEND_POWER_DOWN
 
 # Options to pass to dfu-util when flashing
 DFU_ARGS = -d 0483:df11 -a 0 -s 0x08000000:leave
 
+# Code for backlight breathing:
+SRC += led.c
+
 # Build Options
 #   comment out to disable the options.
 #
 BACKLIGHT_ENABLE = yes
-BOOTMAGIC_ENABLE = yes	# Virtual DIP switch configuration
-## (Note that for BOOTMAGIC on Teensy LC you have to use a custom .ld script.)
-MOUSEKEY_ENABLE = yes	# Mouse keys
-EXTRAKEY_ENABLE = yes	# Audio control and System control
-CONSOLE_ENABLE = no	# Console for debug
-COMMAND_ENABLE = yes    # Commands for debug and configuration
-#SLEEP_LED_ENABLE = yes  # Breathing sleep LED during USB suspend
-NKRO_ENABLE = yes	    # USB Nkey Rollover
-CUSTOM_MATRIX = yes # Custom matrix file
+BOOTMAGIC_ENABLE = no   # Virtual DIP switch configuration(+1000)
+MOUSEKEY_ENABLE = yes   # Mouse keys(+4700)
+EXTRAKEY_ENABLE = yes   # Audio control and System control(+450)
+CONSOLE_ENABLE = no    # Console for debug(+400)
+COMMAND_ENABLE = no     # Commands for debug and configuration
+NKRO_ENABLE = yes       # USB Nkey Rollover - if this doesn't work, see here: https://github.com/tmk/tmk_keyboard/wiki/FAQ#nkro-doesnt-work
 AUDIO_ENABLE = no
-RGBLIGHT_ENABLE = no
-# SERIAL_LINK_ENABLE = yes
-ENCODER_ENABLE = no
+RGBLIGHT_ENABLE = no    # Enable keyboard underlight functionality
+MIDI_ENABLE = no        # MIDI controls
+UNICODE_ENABLE = no     # Unicode
+BLUETOOTH_ENABLE = no   # Enable Bluetooth with the Adafruit EZ-Key HID
+LEADER_ENABLE = yes
