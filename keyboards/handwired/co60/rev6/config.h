@@ -16,19 +16,15 @@
  */
 #pragma once
 
+#include "config_common.h"
+
 /* USB Device descriptor parameter */
 #define VENDOR_ID       0xFEED
 #define PRODUCT_ID      0x0000
-#define DEVICE_VER	0x0001
+#define DEVICE_VER      0x0001
 #define MANUFACTURER    John M Daly
 #define PRODUCT         CO60 rev6
 #define DESCRIPTION     An open hardware sixty percent PCB
-
-#undef MATRIX_ROWS
-#undef MATRIX_COLS
-/* key matrix size */
-#define MATRIX_ROWS 5
-#define MATRIX_COLS 15
 
 /* Address for jumping to bootloader on STM32 chips. */
 /* It is chip dependent, the correct number can be looked up here:
@@ -44,7 +40,6 @@
 */
 #define MATRIX_ROW_PINS { B0, B1, B2, A15, A10 }
 #define MATRIX_COL_PINS { A2, A3, A6, B14, B15, A8, A9, A7, B3, B4, C14, C15, C13, B5, B6 }
-#define UNUSED_PINS
 
 /* COL2ROW, ROW2COL, or CUSTOM_MATRIX */
 #define DIODE_DIRECTION COL2ROW
