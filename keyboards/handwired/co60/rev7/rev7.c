@@ -18,6 +18,31 @@
 #include "backlight.h"
 #include "led.h"
 #include "printf.h"
+#include "rgblight.h"
+
+const rgb_led g_rgb_leds[DRIVER_LED_TOTAL] = {
+  /*{row | col << 4}
+    |             {x=0..224, y=0..64}
+    |              |                 modifier
+    |              |                 | */
+  {{2|(5<<4)},   {112, 39}, 0},
+  {{7|(1<<4)},   {148, 60}, 0},
+  {{3|(4<<4)},   {206, 53}, 0},
+  {{4|(4<<4)},   {206, 3},  0},
+  {{4|(1<<4)},   {150, 3},  0},
+  {{0|(4<<4)},   {74,  3},  0},
+  {{0|(1<<4)},   {18,  3},  0},
+  {{3|(1<<4)},   {18,  54}, 0},
+  {{7|(4<<4)},   {112, 39}, 0},
+  {{7|(4<<4)},   {148, 60}, 0},
+  {{7|(4<<4)},   {206, 53}, 0},
+  {{7|(4<<4)},   {150, 3},  0},
+  {{7|(4<<4)},   {74,  3},  0},
+  {{7|(4<<4)},   {18,  3},  0},
+  {{7|(4<<4)},   {18,  54}, 0},
+  {{7|(4<<4)},   {77,  60}, 0}
+};
+
 
 backlight_levels_config_t kb_backlight_config = {
   .enable = true,
@@ -25,15 +50,11 @@ backlight_levels_config_t kb_backlight_config = {
   .level = BACKLIGHT_LEVELS
 };
 
-uint8_t *o_fb;
-
-uint16_t counterst = 0;
-
 void matrix_init_kb(void) {
         matrix_init_user();
         backlight_init_ports();
 }
 
 void matrix_scan_kb(void) {
-	matrix_scan_user();
+    matrix_scan_user();
 }
