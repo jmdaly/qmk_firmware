@@ -18,12 +18,12 @@
 #include "config_common.h"
 
 // USB Device descriptor parameter
-#define VENDOR_ID       0xFEED
-#define PRODUCT_ID      0x6065
+#define VENDOR_ID       0x5A45 // ZealPC ("ZE")
+#define PRODUCT_ID      0x0065 // Zeal65
 #define DEVICE_VER      0x0001
 #define MANUFACTURER    ZealPC
 #define PRODUCT         Zeal65
-#define DESCRIPTION     Zeal65 (QMK Firmware)
+#define DESCRIPTION     Zeal65
 
 // key matrix size
 #define MATRIX_ROWS 5
@@ -48,11 +48,6 @@
 #define LOCKING_SUPPORT_ENABLE
 // Locking resynchronize hack
 #define LOCKING_RESYNC_ENABLE
-
-// key combination for command
-#define IS_COMMAND() ( \
-    keyboard_report->mods == (MOD_BIT(KC_LSHIFT) | MOD_BIT(KC_RSHIFT)) \
-)
 
 /*
  * Feature disable options
@@ -126,4 +121,3 @@
 #define DYNAMIC_KEYMAP_MACRO_EEPROM_ADDR 666
 #define DYNAMIC_KEYMAP_MACRO_EEPROM_SIZE 358
 #define DYNAMIC_KEYMAP_MACRO_COUNT 16
-
