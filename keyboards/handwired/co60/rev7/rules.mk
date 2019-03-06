@@ -32,13 +32,14 @@ USE_FPU = yes
 # 0x00000000-0x00001000 area is occupied by bootlaoder.*/
 # The CORTEX_VTOR... is needed only for MCHCK/Infinity KB
 # OPT_DEFS = -DCORTEX_VTOR_INIT=0x08005000
-OPT_DEFS =
+OPT_DEFS += -DNO_SUSPEND_POWER_DOWN
 
 # Options to pass to dfu-util when flashing
 DFU_ARGS = -d 0483:df11 -a 0 -s 0x08000000:leave
 
 # Code for backlight breathing:
-SRC += led.c
+SRC += matrix.c \
+       led.c
 
 # Build Options
 #   comment out to disable the options.
@@ -57,3 +58,4 @@ MIDI_ENABLE = no        # MIDI controls
 UNICODE_ENABLE = no     # Unicode
 BLUETOOTH_ENABLE = no   # Enable Bluetooth with the Adafruit EZ-Key HID
 LEADER_ENABLE = yes
+CUSTOM_MATRIX = yes
