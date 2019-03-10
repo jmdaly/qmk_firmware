@@ -38,8 +38,7 @@ OPT_DEFS += -DNO_SUSPEND_POWER_DOWN
 DFU_ARGS = -d 0483:df11 -a 0 -s 0x08000000:leave
 
 # Code for backlight breathing:
-SRC += matrix.c \
-       led.c
+SRC += led.c
 
 # Build Options
 #   comment out to disable the options.
@@ -57,4 +56,4 @@ MIDI_ENABLE = no        # MIDI controls
 UNICODE_ENABLE = no     # Unicode
 BLUETOOTH_ENABLE = no   # Enable Bluetooth with the Adafruit EZ-Key HID
 LEADER_ENABLE = yes
-CUSTOM_MATRIX = yes
+CUSTOM_MATRIX = no
