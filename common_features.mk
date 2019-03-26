@@ -274,6 +274,11 @@ ifeq ($(strip $(HD44780_ENABLE)), yes)
     OPT_DEFS += -DHD44780_ENABLE
 endif
 
+ifeq ($(strip $(VELOCIKEY_ENABLE)), yes)
+    OPT_DEFS += -DVELOCIKEY_ENABLE
+    SRC += $(QUANTUM_DIR)/velocikey.c
+endif
+
 ifeq ($(strip $(DYNAMIC_KEYMAP_ENABLE)), yes)
     OPT_DEFS += -DDYNAMIC_KEYMAP_ENABLE
     SRC += $(QUANTUM_DIR)/dynamic_keymap.c
@@ -301,19 +306,11 @@ ifneq ($(strip $(CUSTOM_MATRIX)), yes)
 endif
 
 DEBOUNCE_DIR:= $(QUANTUM_DIR)/debounce
-# Debounce Modules. If implemented in matrix.c, don't use these.
+# Debounce Modules. Set DEBOUNCE_TYPE=custom if including one manually.
 DEBOUNCE_TYPE?= sym_g
-VALID_DEBOUNCE_TYPES := sym_g eager_pk custom
-ifeq ($(filter $(DEBOUNCE_TYPE),$(VALID_DEBOUNCE_TYPES)),)
-    $(error DEBOUNCE_TYPE="$(DEBOUNCE_TYPE)" is not a valid debounce algorithm)
+ifneq ($(strip $(DEBOUNCE_TYPE)), custom)
+    QUANTUM_SRC += $(DEBOUNCE_DIR)/$(strip $(DEBOUNCE_TYPE)).c
 endif
-ifeq ($(strip $(DEBOUNCE_TYPE)), sym_g)
-    QUANTUM_SRC += $(DEBOUNCE_DIR)/debounce_sym_g.c
-else ifeq ($(strip $(DEBOUNCE_TYPE)), eager_pk)
-    QUANTUM_SRC += $(DEBOUNCE_DIR)/debounce_eager_pk.c
-endif
-
-
 
 ifeq ($(strip $(SPLIT_KEYBOARD)), yes)
     OPT_DEFS += -DSPLIT_KEYBOARD
