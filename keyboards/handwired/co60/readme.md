@@ -22,11 +22,11 @@ The CO60 is a 60% PCB that aims to meet the following goals:
 More info on the project, including all of the design files, can be found [here](https://github.com/jmdaly/CO60).
 
 Keyboard Maintainer: [jmdaly](https://github.com/jmdaly)  
-Hardware Supported: Supports the CO60 PCB, based on the ATMEGA32U4.
+Hardware Supported: Supports the CO60 PCB rev1, rev6, rev7
 Hardware Availability: Through group buys.
 
 Make example for this keyboard (after setting up your build environment):
 
-    make co60:default
+    make handwired/co60/rev7:default
 
 See [build environment setup](https://docs.qmk.fm/build_environment_setup.html) then the [make instructions](https://docs.qmk.fm/make_instructions.html) for more information.

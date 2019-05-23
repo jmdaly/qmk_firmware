@@ -1,5 +1,5 @@
 /*
-Copyright 2018 John M Daly <jmdaly@gmail.com>
+Copyright 2019 John M Daly <jmdaly@gmail.com>
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by

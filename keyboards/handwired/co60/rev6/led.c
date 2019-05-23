@@ -24,8 +24,8 @@ static void breathing_callback(PWMDriver *pwmp);
 
 static PWMConfig pwmCFG = {
   0xFFFF,                              /* PWM clock frequency  */
-  256,                              /* PWM period (in ticks) 1S (1/10kHz=0.1mS 0.1ms*10000 ticks=1S) */
-  NULL,                               /* No Callback */
+  256,                                 /* PWM period (in ticks) 1S (1/10kHz=0.1mS 0.1ms*10000 ticks=1S) */
+  NULL,                                /* No Callback */
   {
       {PWM_OUTPUT_DISABLED, NULL},
       {PWM_OUTPUT_DISABLED, NULL},
@@ -38,8 +38,8 @@ static PWMConfig pwmCFG = {
 
 static PWMConfig pwmCFG_breathing = {
   0xFFFF,                              /* 10kHz PWM clock frequency  */
-  256,                              /* PWM period (in ticks) 1S (1/10kHz=0.1mS 0.1ms*10000 ticks=1S) */
-  breathing_callback,                               /* Breathing Callback */
+  256,                                 /* PWM period (in ticks) 1S (1/10kHz=0.1mS 0.1ms*10000 ticks=1S) */
+  breathing_callback,                  /* Breathing Callback */
   {
       {PWM_OUTPUT_DISABLED, NULL},
       {PWM_OUTPUT_DISABLED, NULL},
@@ -52,28 +52,27 @@ static PWMConfig pwmCFG_breathing = {
 
 // See http://jared.geek.nz/2013/feb/linear-led-pwm
 static uint16_t cie_lightness(uint16_t v) {
-  if (v <= 5243) // if below 8% of max
-    return v / 9; // same as dividing by 900%
+  if (v <= 5243)   // if below 8% of max
+    return v / 9;  // same as dividing by 900%
   else {
-    uint32_t y = (((uint32_t) v + 10486) << 8) / (10486 + 0xFFFFUL); // add 16% of max and compare
+    uint32_t y = (((uint32_t)v + 10486) << 8) / (10486 + 0xFFFFUL);  // add 16% of max and compare
     // to get a useful result with integer division, we shift left in the expression above
     // and revert what we've done again after squaring.
     y = y * y * y >> 8;
-    if (y > 0xFFFFUL) // prevent overflow
+    if (y > 0xFFFFUL)  // prevent overflow
       return 0xFFFFU;
     else
-      return (uint16_t) y;
+      return (uint16_t)y;
   }
 }
-
 
 void backlight_init_ports(void) {
   palSetPadMode(GPIOB, 8, PAL_MODE_ALTERNATE(2));
   pwmStart(&PWMD4, &pwmCFG);
-  if(kb_backlight_config.enable){
-    if(kb_backlight_config.breathing){
+  if (kb_backlight_config.enable) {
+    if (kb_backlight_config.breathing) {
       breathing_enable();
-    } else{
+    } else {
       backlight_set(kb_backlight_config.level);
     }
   } else {
@@ -82,20 +81,19 @@ void backlight_init_ports(void) {
 }
 
 void backlight_set(uint8_t level) {
-  uint32_t duty = (uint32_t)(cie_lightness(0xFFFF * (uint32_t) level / BACKLIGHT_LEVELS));
+  uint32_t duty = (uint32_t)(cie_lightness(0xFFFF * (uint32_t)level / BACKLIGHT_LEVELS));
   if (level == 0) {
-      // Turn backlight off
-      // Disable channel 3 on PWM4
-      pwmDisableChannel(&PWMD4, 2);
+    // Turn backlight off
+    // Disable channel 3 on PWM4
+    pwmDisableChannel(&PWMD4, 2);
   } else {
     // Turn backlight on
-    if(!is_breathing()){
+    if (!is_breathing()) {
       // Enable channel 3 on PWM4
-      pwmEnableChannel(&PWMD4, 2, PWM_FRACTION_TO_WIDTH(&PWMD4,0xFFFF,duty));
+      pwmEnableChannel(&PWMD4, 2, PWM_FRACTION_TO_WIDTH(&PWMD4, 0xFFFF, duty));
     }
   }
 }
-
 
 uint8_t backlight_tick = 0;
 
